@@ -1,0 +1,115 @@
+<%
+  console.log(technicianData)
+  console.log(Array.isArray(technicianData))
+%>
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>POSIT PROJECT</title>
+  <base href="http://127.0.0.1:7000/" target="_blank">
+  <link rel="stylesheet" href="/public/css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
+  <script src="public/js/app.js" defer></script>
+</head>
+<body>
+
+
+  <div class="main-wrapper" id="app">
+    <!-- Vue App HTML Code -->
+    <diV class="login-wraper" v-bind:class="{ hide: hideLogin }">
+      <select v-model="entity" @change="handleLoginSelect">
+        <option value="0" selected>Select your option</option>
+        <option value="-1">ADMIN</option>
+        <%technicianData.forEach(item => {%>
+            <option value="<%=item.id%>"><%=item.name%></option>
+        <%})%>
+      </select>
+    </div>
+    <div v-bind:class="{ hide: !hideLogin }" class="dashboard" >
+      <div class="header">
+        <p>{{date}}</p>
+        <h1>{{name}}</h1>
+        <a @click="handleLogout">logout</a>
+      </div>
+      <div class="main-body">
+        <div class="add-ticket" @click="handleAddTicket" v-bind:class="{ hide: hideAddTicket}">
+          <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          	 viewBox="0 0 489.8 489.8" style="enable-background:new 0 0 489.8 489.8;" xml:space="preserve">
+            <g>
+            	<g>
+            		<path d="M438.2,0H51.6C23.1,0,0,23.2,0,51.6v386.6c0,28.5,23.2,51.6,51.6,51.6h386.6c28.5,0,51.6-23.2,51.6-51.6V51.6
+            			C489.8,23.2,466.6,0,438.2,0z M465.3,438.2c0,14.9-12.2,27.1-27.1,27.1H51.6c-14.9,0-27.1-12.2-27.1-27.1V51.6
+            			c0-14.9,12.2-27.1,27.1-27.1h386.6c14.9,0,27.1,12.2,27.1,27.1V438.2z"/>
+            		<path d="M337.4,232.7h-80.3v-80.3c0-6.8-5.5-12.3-12.3-12.3s-12.3,5.5-12.3,12.3v80.3h-80.3c-6.8,0-12.3,5.5-12.3,12.2
+            			c0,6.8,5.5,12.3,12.3,12.3h80.3v80.3c0,6.8,5.5,12.3,12.3,12.3s12.3-5.5,12.3-12.3v-80.3h80.3c6.8,0,12.3-5.5,12.3-12.3
+            			C349.7,238.1,344.2,232.7,337.4,232.7z"/>
+            	</g>
+            </g>
+          </svg>
+        </div>
+        <div class="new-ticket-wraper" v-bind:class="{ hide: !newTicketBoardVisible}">
+          <div class="row">
+            <div class="row-item">
+              <label for="ticket_title">Title</label>
+              <input id="ticket_title" type="text" v-model="ticket.title"/>
+            </div>
+            <div class="row-item">
+              <label for="ticket_description">Description</label>
+              <textarea id="ticket_description"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row-item">
+              <label for="ticket_customers">Customer</label>
+              <select id="ticket_customers"></select>
+            </div>
+            <div class="row-item">
+              <label for="ticket_hardware">Hardware</label>
+              <select id="ticket_hardware">
+                <option value="pinpad">pinpad</option>
+                <option value="weight">weight</option>
+                <option value="scanner">scanner</option>
+                <option value="biometric reader">biometric reader</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row-item">
+              <label for="ticket_technician">Technician</label>
+              <select id="ticket_technician"></select>
+            </div>
+            <div class="row-item">
+              <label for="ticket_warehouse">Warehouse</label>
+              <select id="ticket_warehouse">
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row-item">
+              <label for="ticket_date">Date</label>
+              <input id="ticket_date" type="date"></select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row-footer">
+              <button class="green" @click="handleSaveNewTicket">SAVE</button>
+              <button class="red" @click="handleCancelNewTicket">CANCEL</button>
+            </div>
+          </div>
+          <div class="error-message" v-bind:class="{ hide: !newTicketErrorVisible}">
+            <h1>*** ALL FIELDS ARE REQUIRED ***</h1>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+<!--Add Scripts here-->
+
+
+</html>

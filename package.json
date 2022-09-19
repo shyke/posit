@@ -1,0 +1,23 @@
+{
+  "name": "posit",
+  "version": "1.0.0",
+  "description": "Interview Assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/start.js | npx pino-pretty"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/static": "^6.5.0",
+    "@fastify/view": "^7.1.0",
+    "ejs": "^3.1.8",
+    "fastify": "^4.6.0",
+    "sqlite3": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "pino-pretty": "^9.1.0"
+  }
+}
