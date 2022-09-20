@@ -16,7 +16,7 @@ const technicianRoutes = async (app, options) => {
     app.log.info("request.query", request.query);
     const technicianData = await technicianService.getAll();
     app.log.info("technicianData", technicianData);
-    return technicianData;
+    return { table: "technicians", data: technicianData };
   });
 
   // Get One

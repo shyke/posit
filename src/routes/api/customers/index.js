@@ -19,7 +19,7 @@ const customerRoutes = async (app, options) => {
     app.log.info("request.query", request.query);
     const customersData = await customerService.getAll();
     app.log.info("customersData", customersData);
-    return customersData;
+    return { table: "customers", data: customersData };
   });
 
   // Get One

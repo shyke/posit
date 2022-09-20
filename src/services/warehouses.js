@@ -73,45 +73,59 @@ class WarehouseService {
       throw err;
     }
     this.connect();
-    return new Promise((resolve, reject) => {
+    let row = await new Promise((resolve, reject) => {
       let sql = `SELECT * FROM ${this.table} WHERE id = ?`;
-      return this.db.get(sql, [id], (err, rows) => {
+      return this.db.get(sql, [id], (err, row) => {
         if (err) {
           console.error(err.message);
-          this.disconnect();
           reject(err);
         } else {
-          console.log(rows);
-          this.disconnect();
-          resolve(rows);
+          console.log(row);
+          resolve(row);
         }
       });
     });
+    this.disconnect();
+    return row;
   }
 
-  async update({ id, data }) {
+  async update(id, data) {
     let { key, value } = data;
     const err = new Error();
-    if (!id || !key || typeof value !== "number") {
+    if (!id || !key) {
       err.statusCode = 400;
       err.message = "id & data are needed.";
       throw err;
     }
-    this.connect();
     return new Promise((resolve, reject) => {
-      let sql = `UPDATE ${this.table}
-                  SET ${key} = ${value}
-                  WHERE id = ${id}`;
-
-      return this.db.run(sql, [], err => {
+      this.connect();
+      let sql_query = `SELECT * FROM ${this.table} WHERE id = ?`;
+      this.db.get(sql_query, [id], (err, warehouseData) => {
         if (err) {
           console.error(err.message);
-          this.disconnect();
           reject(err);
         } else {
-          console.log(this.changes);
-          this.disconnect();
-          resolve(this.changes);
+          let final_key = `${key.split(" ").join("_")}_stock`;
+          let stock = warehouseData[final_key];
+          if (value === "add") {
+            stock = stock + 1;
+          } else if (value === "subtract" && stock > 0) {
+            stock = stock - 1;
+          }
+          let sql = `UPDATE ${this.table}
+                      SET ${final_key} = ${stock}
+                      WHERE id = ${id}`;
+
+          return this.db.run(sql, [], err => {
+            if (err) {
+              console.error(err.message);
+              this.disconnect();
+              reject(err);
+            } else {
+              this.disconnect();
+              resolve("SUCCESS");
+            }
+          });
         }
       });
     });
