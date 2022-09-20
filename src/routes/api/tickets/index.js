@@ -2,7 +2,7 @@
 const { TicketsService } = require("../../../services/tickets");
 const { WarehouseService } = require("../../../services/warehouses");
 
-// [DESCRIPTION 📋] Plugin for handeling the technicians routes
+// [DESCRIPTION 📋] Plugin for handeling the Tickets routes
 const ticketsRoutes = async (app, options) => {
   const ticketsService = new TicketsService();
   const warehouseService = new WarehouseService();

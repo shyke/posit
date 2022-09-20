@@ -1,10 +1,5 @@
 const sqlite3 = require("sqlite3").verbose();
 class WarehouseService {
-  /**
-   * Creates an instance of ProductService.
-   * @param {object} app fastify app
-   * @memberof CustomerService
-   */
   constructor(app) {
     this.connected = false;
     this.table = "warehouses";
@@ -36,16 +31,6 @@ class WarehouseService {
       console.log("************ Close the database connection ***************");
       this.connected = false;
     });
-  }
-
-  async getEventsCount() {
-    const count = this.collection.countDocuments();
-    return count;
-  }
-
-  async create(event_data, options = {}) {
-    const res = this.collection.insert(event_data, options);
-    return res;
   }
 
   async getAll() {

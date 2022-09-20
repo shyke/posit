@@ -8,14 +8,7 @@
   --main-primary-color: #a4161a /*#ba181b*/;
   --main-secondary-color: #e5383b;
   --main-secondary-color-rgba: rgba(244, 162, 97, 0.1);
-  --main-background-color: #00171d;
-  --main-error-color: #e63946;
-  --main-highlight-color: #ba181b;
-  --main-light-background-color: #f4f2f3;
-  --main-text-on-light-color: rgb(38, 70, 83);
   --main-text-on-dark-color: #ffffff;
-  --main-text-link-color: rgb(42, 157, 143);
-  --main-text-link-hover-color: #ba181b;
 }
 
 body {
@@ -102,7 +95,7 @@ body {
 
 .add-ticket > svg {
   pointer-events: none;
-  fill: #ffffff;
+  fill: var(--main-text-on-dark-color);
 }
 
 .new-ticket-wraper {
@@ -156,7 +149,7 @@ textarea {
   margin: 10px;
   cursor: pointer;
   font-size: 18px;
-  color: #ffffff;
+  color: var(--main-text-on-dark-color);
 }
 
 .green {
@@ -219,7 +212,7 @@ th {
 
 tr:hover {
   background: var(--main-secondary-color-rgba);
-  color: #ffffff;
+  color: var(--main-text-on-dark-color);
 }
 
 .action-wraper {
@@ -247,7 +240,7 @@ tr:hover {
 }
 
 .action-button svg {
-  fill: #ffffff;
+  fill: var(--main-text-on-dark-color);
   pointer-events: none;
 }
 

@@ -7,8 +7,6 @@ class TicketsService {
   }
 
   connect() {
-    // Sanity check
-    // if (this.connected) return;
     this.db = new sqlite3.Database(
       "./db/task.db",
       sqlite3.OPEN_READWRITE,
@@ -100,25 +98,6 @@ class TicketsService {
         }
       });
     });
-  }
-
-  async update({ id, eventData }) {
-    await this.getOne(id);
-
-    const { upsertedId } = await this.collection.updateOne(
-      {
-        _id: ObjectId(id)
-      },
-      {
-        $set: eventData
-      },
-      {
-        upsert: true
-      }
-    );
-    const after = await this.getOne(upsertedId || id);
-
-    return after;
   }
 
   async delete(id) {
